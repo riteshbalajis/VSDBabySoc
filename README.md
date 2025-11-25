@@ -130,7 +130,7 @@ Top-level SoC integration file that connects the RVMyth CPU, DAC, PLL, and other
 Simulation testbench that drives inputs, monitors outputs, and verifies the behavior of the entire SoC design.
 
 
-## Flow for (RTL to Post Routing)
+## Flow for (RTL to Post GDSII )
 
 ![](img/librelane-flow.png)
 
@@ -167,11 +167,11 @@ Simulation testbench that drives inputs, monitors outputs, and verifies the beha
 
 ![](img/sandpiper.png)
 
-6:Deactivate V-env (when done)
+6: Deactivate V-env (when done)
 
     deactivate
 
-### - Run SandPiper-SaaS to Convert TL-Verilog to Verilog
+###  Run SandPiper-SaaS to Convert TL-Verilog to Verilog
 
     cd VSDBabySoC
     sandpiper-saas -i ./src/module/*.tlv -o rvmyth.v --bestsv --noline -p verilog --outdir ./src/module/
@@ -201,36 +201,39 @@ Simulation testbench that drives inputs, monitors outputs, and verifies the beha
 - after the run listing the files in modules the rvmyth.v is created as the converstion of rvmyth.tlv
 
 
-**First Section of the flow where we stimulate,synthesis,static timing analysis the VSDBabySoc**
+## First Section of the flow where we stimulate,synthesis,static timing analysis the VSDBabySoc:
 
-![](img/1_flow.png)
+<div align="center">
+
+   ![](img/1_flow.png)
+</div>
 
 
-##  stimulation using Icarus Verilog
+## Stimulation using Icarus Verilog
 
 
 
-1. Create a Directory to Store waveform:
+1. **Create a Directory to Store waveform:**
 
          mkdir -p output/pre_synth_sim
 
-2. Synthesis
+2. **Synthesis**
 
          iverilog -o output/pre_synth_sim.out -DPRE_SYNTH_SIM src/module/testbench.v -I src/include -I src/module
 
-| **Section** | **Syntax** | **Description** |
-|-------------|------------|------------------|
-| **1. Compiler** | `iverilog` | Runs the Icarus Verilog compiler to build the design for simulation |
-| **2. Output File** | `-o output/pre_synth_sim.out` | Specifies the output executable generated after compilation |
-| **3. Macro Definition** | `-DPRE_SYNTH_SIM` | Defines a preprocessor macro that enables conditional compilation inside Verilog source files |
-| **4. Source File** | `src/module/testbench.v` | The main Verilog source file used as the entry point for compilation (usually the testbench) |
-| **5. Include Paths** | `-I src/include`, `-I src/module` | Adds directories to the search path for \include` files used inside Verilog code and add verilog files inside module |
+   | **Section** | **Syntax** | **Description** |
+   |-------------|------------|------------------|
+   | **1. Compiler** | `iverilog` | Runs the Icarus Verilog compiler to build the design for simulation |
+   | **2. Output File** | `-o output/pre_synth_sim.out` | Specifies the output executable generated after compilation |
+   | **3. Macro Definition** | `-DPRE_SYNTH_SIM` | Defines a preprocessor macro that enables conditional compilation inside Verilog source files |
+   | **4. Source File** | `src/module/testbench.v` | The main Verilog source file used as the entry point for compilation (usually the testbench) |
+   | **5. Include Paths** | `-I src/include`, `-I src/module` | Adds directories to the search path for \include` files used inside Verilog code and add verilog files inside module |
 
 
 ![](img/stimulation.png)
 
 
-3. Running the output file:
+3. **Running the output file:**
 
    Moving to Ouptut Directory:
 
@@ -669,10 +672,10 @@ set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
 Physical design is the process of transforming a synthesized netlist into a real chip layout. It involves steps like floorplanning, placement, clock tree synthesis, and routing to organize cells and connect them physically. After routing, post-route checks ensure timing, wiring, and design rules are all clean before final sign-off.
 
 ## OpenRoad:
-
-![](img/2_flor.png)
-
-- this is the second section in overall RTL to Post_Route of VSDBabySoc.This OpenRoad Software take care of Synthesis ,Floorplanning, Placement, CTS, Routing
+<div align="center">
+  ![](img/2_flor.png)
+</div>
+- This is the second section in overall RTL to Post_Route of VSDBabySoc.This OpenRoad Software take care of Synthesis ,Floorplanning, Placement, CTS, Routing
 
 OpenROAD is an open-source digital physical design engine used to automate the major backend steps of chip implementation.  
 
@@ -1725,8 +1728,9 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 
 ## RC Extraction & Output Generation :
 
-
-![](img/3_flow.png)
+<div align="center">
+   ![](img/3_flow.png)
+</div>
 
 - this is the 3rd section of the RTL to PostRoute STA
 
