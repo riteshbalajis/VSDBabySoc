@@ -129,6 +129,14 @@ Top-level SoC integration file that connects the RVMyth CPU, DAC, PLL, and other
 - testbench.v
 Simulation testbench that drives inputs, monitors outputs, and verifies the behavior of the entire SoC design.
 
+
+## Flow for (RTL to Post Routing)
+
+![](img/librelane-flow.png)
+
+![](img/openlane2.png)
+
+
 ## Converstion of .tlv to .v (using sandpiper-saas ):
 
 
@@ -192,7 +200,15 @@ Simulation testbench that drives inputs, monitors outputs, and verifies the beha
 
 - after the run listing the files in modules the rvmyth.v is created as the converstion of rvmyth.tlv
 
+
+**First Section of the flow where we stimulate,synthesis,static timing analysis the VSDBabySoc**
+
+![](img/1_flow.png)
+
+
 ##  stimulation using Icarus Verilog
+
+
 
 1. Create a Directory to Store waveform:
 
@@ -652,7 +668,11 @@ set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
 
 Physical design is the process of transforming a synthesized netlist into a real chip layout. It involves steps like floorplanning, placement, clock tree synthesis, and routing to organize cells and connect them physically. After routing, post-route checks ensure timing, wiring, and design rules are all clean before final sign-off.
 
-### OpenRoad:
+## OpenRoad:
+
+![](img/2_flor.png)
+
+- this is the second section in overall RTL to Post_Route of VSDBabySoc.This OpenRoad Software take care of Synthesis ,Floorplanning, Placement, CTS, Routing
 
 OpenROAD is an open-source digital physical design engine used to automate the major backend steps of chip implementation.  
 
@@ -1704,6 +1724,11 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 
 
 ## RC Extraction & Output Generation :
+
+
+![](img/3_flow.png)
+
+- this is the 3rd section of the RTL to PostRoute STA
 
 ### Cloning the Open_PDKs Repository:
 
