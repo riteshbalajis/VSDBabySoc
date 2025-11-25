@@ -9,7 +9,7 @@ Unlike older designs where the CPU, GPU, and memory were mounted separately on a
 
 ---
 
-![](img/babtsoc)
+![](img/babysoc.png)
 ## VSD BabySoC
 
 VSD BabySoC is a small RISC-V–based System-on-Chip designed for open-source chip design learning and experimentation.
