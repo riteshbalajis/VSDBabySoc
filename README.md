@@ -534,6 +534,8 @@ Files Included:
 
 ![](img/staanalysis.png)
 
+- The slack time is 2.26 which is a positive slack denotes that our design mets the timing constraint very well.
+
 ###   PVT Corner Analysis of VSDBabySoc :
 
 - timing librarier is needed to perform this PVT Corner Analysis:
@@ -666,7 +668,7 @@ It performs key tasks such as floorplanning, placement, clock tree synthesis, an
 ### Preparing the VSDBabySoC Design for OpenROAD:
 
 ### 1. Copy Required Design Assets
-From your **VSDBabySoC** project folder, copy the following into:
+From  **VSDBabySoC** project folder, copy the following into:
 
 `OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/`
 
@@ -798,7 +800,7 @@ This ensures the OpenROAD flow can find design’s source code during synthesis.
 ![](img/drc2.png)
 ![](img/drc1.png)
 
-### Removing Two MET4 OBS Rectangles Fixed the Congestion
+### By Removing Two MET4 OBS Rectangles Fixed the Congestion
 
 The routing congestion occurred because the MET4 output pin was almost completely surrounded by MET4 OBS blockages, leaving no legal path for the router to access the pin. Two specific OBS rectangles were blocking the left and right approach to the pin, which caused the router to fail.
 
@@ -811,26 +813,28 @@ The routing congestion occurred because the MET4 output pin was almost completel
 
 This means:
 
-x-range: 1172.680 → 1173.730
+- x-range: 1172.680 → 1173.730
 
-y-range: 1127.710 → 1175.360
+- y-range: 1127.710 → 1175.360
 
 This is the location of pin the router must reach on MET4.
 
 **The MET4 OBS Blockages Around the Pin**
 
-The LEF contains several MET4 blockage rectangles, including:
-    RECT 147.000 1171.010 152.270 1175.050 ;
-    RECT 154.520 1171.010 1172.280 1175.050 ;   <-- (A)
-    RECT 147.000 1127.310 1172.280 1171.010 ;   <-- (B)
-    RECT 1174.130 1127.310 1188.200 1175.050 ;  <-- (C)
-    RECT 147.000 648.540 1188.200 1127.310 ;
+   The LEF contains several MET4 blockage rectangles, including:
+   
+       RECT 147.000 1171.010 152.270 1175.050 ;
+       RECT 154.520 1171.010 1172.280 1175.050 ;   <-- (A)
+       RECT 147.000 1127.310 1172.280 1171.010 ;   <-- (B)
+       RECT 1174.130 1127.310 1188.200 1175.050 ;  <-- (C)
+       RECT 147.000 648.540 1188.200 1127.310 ;
 
 **Why Removing (B) and (C) Fixed the Congestion**
 
 When the following two were removed:
-    RECT 147.000 1127.310 1172.280 1171.010 ;   (B)
-    RECT 1174.130 1127.310 1188.200 1175.050 ;  (C)
+
+       RECT 147.000 1127.310 1172.280 1171.010 ;   (B)
+       RECT 1174.130 1127.310 1188.200 1175.050 ;  (C)
 
 - A clear MET4 path opened on the left side
 - A clear MET4 path opened on the right side
@@ -841,11 +845,11 @@ Finally, After removing these two rectangles, the pin became accessible again on
 
 ### Correction in avsddac.lef file (OBS - Obstruction Section Reduction) :
 
-- avsddac.lef
+- **avsddac.lef**
 
 ![](img/dac_lef_b.png)
 
-- removing the overlaping rectangle (B),(C)
+- **removing the overlaping rectangle (B),(C)**
 
 ![](img/dac_lef_a.png)
 
@@ -1066,10 +1070,10 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 - No negative slack, which means there are no hold violations after CTS
 
 <details>
-<summary><strong>**cts final report**</strong></summary>
+<summary><strong>cts final report</strong></summary>
 
 
-            ==========================================================================
+        ==========================================================================
         cts final report_tns
         --------------------------------------------------------------------------
         tns max 0.00
@@ -1544,6 +1548,7 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 
 
 </details>
+- positive slack indicates that our cts met the timing constraint well.
 
 ### Routing
 
@@ -1570,7 +1575,7 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 
 - Command to enter in the scripting window
 
-    report_check
+       `report_check
 
 <details>
 <summary><strong>report_check</strong></summary>
@@ -1648,9 +1653,9 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 
 ### Convert .odb file to .def file
 
-**File in Results**
+**Files in Result**
 
-![](img/results_b.png))
+![](img/results_b.png)
 
     cd flow
     openroad
@@ -1864,7 +1869,10 @@ This file is copied from the  4_cts.sdc from the directory ~/Desktop/OpenROAD-fl
 
 ![](img/post_table1.png)
 
+### Timing Report (PostSynthesis VS PostRoute):
+
 ![](img/timing_cmp.png)
+
 
 ### Summary of Timing Report:
 
