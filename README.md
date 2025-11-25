@@ -673,6 +673,7 @@ Physical design is the process of transforming a synthesized netlist into a real
 
 ## OpenRoad:
 <div align="center">
+   
   ![](img/2_flor.png)
 </div>
 - This is the second section in overall RTL to Post_Route of VSDBabySoc.This OpenRoad Software take care of Synthesis ,Floorplanning, Placement, CTS, Routing
@@ -1729,6 +1730,7 @@ In this floorplan the pll is place right side of the dac by macro.tcl
 ## RC Extraction & Output Generation :
 
 <div align="center">
+   
    ![](img/3_flow.png)
 </div>
 
