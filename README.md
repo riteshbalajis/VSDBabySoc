@@ -388,6 +388,7 @@ Synthesis is the process of converting RTL Verilog into a gate-level representat
 ![](img/wave.png)
 
 ### PreSynthesis vs PostSynthesis(GLS):
+
 **Post Synthesis**
 ![](img/wave.png)
 
@@ -509,18 +510,20 @@ Files Included:
 
 - command to run:
 
-    sta
-    source  ~/Desktop/vlsi/sky130RTLDesignAndSynthesisWorkshop/verilog_files/VSDBabySoC/sta/OpenSTA/examples/BabySoC/vsdbabysoc_min_max_delays.tcl
+       sta
+     
+       source  ~/Desktop/vlsi/sky130RTLDesignAndSynthesisWorkshop/verilog_files/VSDBabySoC/sta/OpenSTA/examples/BabySoC/vsdbabysoc_min_max_delays.tcl
 
 
 ![](img/error_staa.png)
 
 - this error will arise due the inproper command line given in avsdpll.lib file
+  
 ![](img/error_avsdpll.png)
 
 - the single line command line is changes to mutliple line commanad line
 
-![](img/correct_avspll.png)
+![](img/correct_avsdpll.png)
 
 ### Exectuting the script again:
 
@@ -587,7 +590,7 @@ set list_of_lib_files(1) "sky130_fd_sc_hd__tt_025C_1v80.lib"
 
 </details>
 
-### Exectuing PVT Corner Analysis:
+### Executing PVT Corner Analysis:
 
 - command:
 
